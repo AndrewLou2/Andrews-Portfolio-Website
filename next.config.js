@@ -1,12 +1,18 @@
 /** @type {import('next').NextConfig} */
+
+const isProd = process.env.NODE_ENV === "production";
+const repoName = "Andrews-Portfolio-Website";
+
 const nextConfig = {
   output: "export",
-  // For GitHub Pages deployment
-  basePath: "/Andrews-Portfolio-Website",
-  assetPrefix: "/Andrews-Portfolio-Website/",
+  // Only apply basePath in production (GitHub Pages)
+  basePath: isProd ? `/${repoName}` : "",
+  assetPrefix: isProd ? `/${repoName}/` : "",
   images: {
     unoptimized: true,
   },
+  // Ensure trailing slashes for GitHub Pages
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
