@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================================
+   THEME VARIABLES
+   =========================================== */
+:root {
+  /* Colors */
+  --color-bg: #0a0a0a;
+  --color-text: #f5f5f0;
+  --color-accent: #ff3d00;
+  --color-accent-alt: #00ff88;
+
+  /* Opacity variants for text */
+  --text-muted: 0.6;
+  --text-subtle: 0.4;
+  --text-faint: 0.3;
+
+  /* Borders */
+  --border-subtle: rgba(245, 245, 240, 0.1);
+  --border-hover: rgba(245, 245, 240, 0.4);
+
+  /* Transitions */
+  --transition-fast: 300ms;
+  --transition-medium: 500ms;
+  --transition-slow: 700ms;
+  --ease-elastic: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ===========================================
+   BASE RESETS
+   =========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Desktop: fixed viewport, no scroll */
+@media (min-width: 768px) {
+  html,
+  body {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+/* Mobile: allow vertical scroll */
+@media (max-width: 767px) {
+  html,
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-space-mono), "Space Mono", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===========================================
+   COMPONENT CLASSES
+   Use these instead of raw Tailwind in components
+   =========================================== */
+@layer components {
+  /* Layout */
+  .section-container {
+    @apply absolute inset-0 bg-off-black;
+  }
+
+  .section-border {
+    @apply border-b border-text/10;
+  }
+
+  .section-border-right {
+    @apply border-r border-text/10;
+  }
+
+  /* Content overlays (for LOU and ABOUT sections) */
+  .content-overlay {
+    @apply absolute inset-0 flex flex-col justify-center p-6 md:p-10 bg-off-black/95 z-20;
+  }
+
+  .content-overlay-centered {
+    @apply content-overlay items-center;
+  }
+
+  .content-overlay-scrollable {
+    @apply content-overlay overflow-y-auto;
+  }
+
+  /* Typography */
+  .heading-xl {
+    @apply font-display text-4xl md:text-6xl lg:text-7xl text-text;
+  }
+
+  .heading-lg {
+    @apply font-display text-3xl md:text-5xl text-text;
+  }
+
+  .heading-md {
+    @apply font-display text-3xl md:text-4xl text-text;
+  }
+
+  .heading-sm {
+    @apply font-display text-2xl md:text-3xl text-text;
+  }
+
+  .body-text {
+    @apply font-body text-sm md:text-base text-text/60 leading-relaxed;
+  }
+
+  .body-text-muted {
+    @apply font-body text-sm text-text/40;
+  }
+
+  .label-text {
+    @apply font-body text-base md:text-lg text-text/50;
+  }
+
+  .meta-text {
+    @apply font-body text-sm text-text/30;
+  }
+
+  /* Links */
+  .nav-link {
+    @apply text-text/50 hover:text-text transition-colors text-sm;
+  }
+
+  .icon-link {
+    @apply text-text/40 hover:text-text transition-colors;
+  }
+
+  /* Skills/Tags */
+  .skill-tag {
+    @apply px-3 py-1 border border-text/30 text-text text-xs font-body;
+  }
+
+  /* Cards/Items */
+  .list-item {
+    @apply py-4 border-b border-text/10 hover:border-text/40 transition-colors;
+  }
+
+  .experience-card {
+    @apply border-b border-text/10 pb-6;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply p-6 md:p-10;
+  }
+}
+
+/* ===========================================
+   UTILITY CLASSES
+   =========================================== */
+@layer utilities {
+  /* Flex transition for elastic animations */
+  .flex-elastic {
+    transition: flex var(--transition-slow) var(--ease-elastic);
+  }
+}
+
+/* ===========================================
+   SPECIAL EFFECTS
+   =========================================== */
+
+/* Noise texture overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 9999;
+}
+
+/* Text selection */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* Link hover underline effect */
+.link-hover {
+  position: relative;
+  display: inline-block;
+}
+
+.link-hover::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width var(--transition-fast) ease-out;
+}
+
+.link-hover:hover::after {
+  width: 100%;
+}
+
+/* ===========================================
+   SCROLLBAR
+   =========================================== */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-accent);
+  }
+}
+
+/* Portfolio section scrollbar */
+.portfolio-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.portfolio-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.portfolio-scroll::-webkit-scrollbar-thumb {
+  background: rgba(245, 245, 240, 0.2);
+  border-radius: 2px;
+}
+
+.portfolio-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 245, 240, 0.4);
+}
