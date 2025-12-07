@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "predeploy": "npm run build && type nul > out/.nojekyll",
-    "deploy": "gh-pages -d out -t true"
+    "deploy": "gh-pages -d out --dotfiles"
   },
   "dependencies": {
     "framer-motion": "^10.16.0",
