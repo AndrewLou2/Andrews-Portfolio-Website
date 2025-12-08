@@ -4,30 +4,19 @@ import ElasticText from './ElasticText'
 import { GitHubIcon, ExternalLinkIcon } from './icons'
 import { PROJECTS, EXPERIENCE, type Project, type Experience } from '@/data/portfolio'
 
-// ===========================================
-// SUB-COMPONENTS
-// ===========================================
-
-/** Single experience card */
 function ExperienceCard({ experience }: { experience: Experience }) {
   return (
     <div className="experience-card">
-      {/* Header: Company + Period */}
       <div className="flex justify-between items-baseline gap-2 mb-1">
         <span className="heading-sm">{experience.title}</span>
         <span className="meta-text">{experience.period}</span>
       </div>
-      
-      {/* Role */}
       <span className="label-text block mb-2">{experience.role}</span>
-      
-      {/* Description */}
       <p className="body-text">{experience.description}</p>
     </div>
   )
 }
 
-/** Project links (GitHub + Preview) */
 function ProjectLinks({ project }: { project: Project }) {
   return (
     <div className="flex items-center gap-3 flex-shrink-0">
@@ -58,28 +47,21 @@ function ProjectLinks({ project }: { project: Project }) {
   )
 }
 
-/** Single project card */
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="group list-item">
-      {/* Header: Title + Links */}
+    <div className="py-4">
       <div className="flex justify-between items-start gap-2 mb-1">
-        <span className="heading-sm text-text/80 group-hover:text-text transition-colors">
+        <span className="heading-sm text-text/80">
           {project.title}
         </span>
         <ProjectLinks project={project} />
       </div>
-      
-      {/* Description */}
       <p className="body-text mb-2">{project.description}</p>
-      
-      {/* Tech stack */}
       <span className="body-text-muted">{project.category}</span>
     </div>
   )
 }
 
-/** Experience section */
 function ExperienceSection() {
   return (
     <div className="section-padding section-border flex-shrink-0">
@@ -93,7 +75,6 @@ function ExperienceSection() {
   )
 }
 
-/** Projects section */
 function ProjectsSection() {
   return (
     <div className="section-padding section-border flex-shrink-0">
@@ -107,27 +88,24 @@ function ProjectsSection() {
   )
 }
 
-// ===========================================
-// MAIN COMPONENT
-// ===========================================
-
 export default function PortfolioSection() {
   return (
-    <div className="absolute inset-0 flex flex-col bg-bg overflow-y-auto portfolio-scroll">
-      {/* Elastic text header */}
-      <div className="relative w-full h-full flex-shrink-0">
-        <ElasticText 
-          text="PORTFOLIO" 
-          scaleX={0.4}
-          scaleY={2}
-        />
+    <>
+      <div className="hidden md:flex absolute inset-0 flex-col bg-bg overflow-y-auto portfolio-scroll">
+        <div className="relative w-full h-full flex-shrink-0">
+          <ElasticText text="PORTFOLIO" scaleX={0.4} scaleY={2} />
+        </div>
+        <ExperienceSection />
+        <ProjectsSection />
       </div>
 
-      {/* Experience */}
-      <ExperienceSection />
-
-      {/* Projects */}
-      <ProjectsSection />
-    </div>
+      <div className="md:hidden flex flex-col bg-bg w-full">
+        <div className="relative w-full h-[50vh]">
+          <ElasticText text="PORTFOLIO" scaleX={0.4} scaleY={2} />
+        </div>
+        <ExperienceSection />
+        <ProjectsSection />
+      </div>
+    </>
   )
 }

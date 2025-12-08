@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Bebas_Neue, Space_Mono } from 'next/font/google'
 import './globals.css'
 
@@ -17,8 +17,16 @@ const spaceMono = Space_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'LOU | Portfolio',
-  description: 'Creative Developer & Designer Portfolio',
+  title: 'Andrew Lou | Portfolio',
+  description: 'Software Engineer Portfolio',
+}
+
+// Explicit viewport configuration for proper mobile rendering
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default function RootLayout({
@@ -30,7 +38,6 @@ export default function RootLayout({
     <html lang="en" className={`${bebasNeue.variable} ${spaceMono.variable}`}>
       <body>
         {children}
-        <div className="noise-overlay" />
       </body>
     </html>
   )

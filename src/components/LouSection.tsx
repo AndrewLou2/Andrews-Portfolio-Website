@@ -45,7 +45,7 @@ const CONTACT_LINKS = [
 function ContactLinks() {
   return (
     <motion.div 
-      className="flex flex-col md:flex-row gap-4 justify-center"
+      className="flex flex-row gap-4 justify-center"
       {...SLIDE_UP_ANIMATION}
       transition={{ delay: 0.3, duration: 0.5 }}
     >
