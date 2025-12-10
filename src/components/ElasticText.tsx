@@ -35,8 +35,6 @@ export default function ElasticText({
       <text
         x="50"
         y="53"
-        textAnchor="middle"
-        dominantBaseline="central"
         fill={color}
         style={{
           fontSize: FONT_SIZE,
@@ -45,6 +43,8 @@ export default function ElasticText({
           letterSpacing: '0.02em',
           transform: `scale(${scaleX}, ${scaleY})`,
           transformOrigin: '50% 50%',
+          textAnchor: 'middle',
+          dominantBaseline: 'central',
         }}
       >
         {text}
